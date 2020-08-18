@@ -1,0 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+import com.mysql.jdbc.MysqlIO;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author pedro
+ */
+public class DbUtil {
+
+    private static Connection connection = null;
+
+    public static Connection getConnection() {
+        if (connection != null) {
+            return connection;
+        } else {
+            try {
+                String user = "root";
+                String password = "";
+                Class.forName("com.mysql.jdbc.Driver");
+
+                connection = DriverManager.getConnection("jdbc:mysql://localhost/dbdesafiogws", user, password);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return connection;
+        }
+    }
+}
